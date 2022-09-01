@@ -7,18 +7,22 @@
                     Dashboard
                 </a>
             </li>
+            @if(auth()->user()->isAdmin())
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <span data-feather="file" class="align-text-bottom"></span>
                     Users
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->isMember())
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('attendances.index') }}">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Attendance
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </nav>

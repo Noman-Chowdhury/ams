@@ -24,7 +24,7 @@ Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController
 
 
 Route::get('/', function () {
-    return view('test');
+    return view('home');
 })->middleware('auth');
 
 Auth::routes();
