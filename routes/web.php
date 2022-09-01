@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +12,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class);
+//Route::get('login', )
+Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware('auth');
+Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class)->middleware('auth');
+
+
+//Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+//Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+
+Route::get('/', function () {
+    return view('test');
+})->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -21,7 +21,7 @@
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                    Role
                 </label>
-                <select name="role" id="">
+                <select name="role" id=""  class="form-control" >
                     <option value="admin">Admin</option>
                     <option value="member">Member</option>
                 </select>
@@ -47,6 +47,7 @@
                 <input name="password_confirmation" class="form-control" type="password" value="{{ old('password_confirmation') }}">
             </div>
         </div>
-        <button type="submit">Submit</button>
+        <br>
+        <button type="submit"  class="btn btn-success" >Submit</button>
     </form>
 @endsection
