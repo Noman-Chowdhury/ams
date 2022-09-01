@@ -22,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-
+        'avatar'
     ];
 
     /**
@@ -48,6 +48,7 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
     public function isMember(): bool
     {
         return $this->role === 'member';
@@ -55,11 +56,11 @@ class User extends Authenticatable
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class,'user_id');
+        return $this->hasMany(Attendance::class, 'user_id');
     }
 
     public function presentToday()
     {
-        return $this->attendances()->whereDate('date',Carbon::now());
+        return $this->attendances()->whereDate('date', Carbon::now());
     }
 }

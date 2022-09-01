@@ -45,7 +45,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUserRequest $request)
@@ -53,8 +53,8 @@ class UserController extends Controller
         $validated = $request->validated();
         try {
             $this->user->storeUser($validated);
-        }catch(\Exception $exception){
-            return back();
+        } catch (\Exception $exception) {
+            return $exception;
         }
         return redirect()->route('users.index');
     }
@@ -62,41 +62,41 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user =$this->user->findByEncryptedId($id);
+        $user = $this->user->findByEncryptedId($id);
         return back();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user =$this->user->findByEncryptedId($id);
+        $user = $this->user->findByEncryptedId($id);
         return view('admin.users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, $id)
     {
         $validated = $request->validated();
-        try{
+        try {
             $this->user->updateUser($id, $validated);
-        }catch (\Exception $exception){
-
+        } catch (\Exception $exception) {
+            return $exception;
         }
         return redirect()->route('users.index');
     }
@@ -104,13 +104,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-       $user = $this->user->findByEncryptedId($id);
-       $user->delete();
-       return back();
+        $user = $this->user->findByEncryptedId($id);
+        $user->delete();
+        return back();
     }
 }

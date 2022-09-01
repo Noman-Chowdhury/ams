@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>User Create Page</h1>
-    <form action="{{route('users.store')}}" method="POST">
+    <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-4">
@@ -25,6 +25,12 @@
                     <option value="admin">Admin</option>
                     <option value="member">Member</option>
                 </select>
+            </div>
+            <div class="col-4">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    Profile Picture
+                </label>
+                <input name="avatar" class="form-control" type="file" accept="image/*">
             </div>
         </div>
         <div class="row">

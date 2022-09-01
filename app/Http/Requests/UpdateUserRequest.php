@@ -25,9 +25,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name'=>['string', 'max:150'],
-            'email' => ['string', 'unique:users,email'],
+            'email' => ['string', 'unique:users,email,18'],
             'password' => ['string','min:8', 'max:20'],
-            'avatar' => ['nullable'],
+            'avatar' => ['nullable','image'],
             'role' => ['in:admin,member']
         ];
     }
