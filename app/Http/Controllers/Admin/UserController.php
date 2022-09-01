@@ -27,7 +27,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return $this->user->getAllUsers();
+        $users = $this->user->getAllUsers();
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -37,7 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return back();
+        return view('admin.users.create');
     }
 
     /**
@@ -54,7 +55,7 @@ class UserController extends Controller
         }catch(\Exception $exception){
             return back();
         }
-        return back();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -78,6 +79,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user =$this->user->findByEncryptedId($id);
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -95,6 +97,7 @@ class UserController extends Controller
         }catch (\Exception $exception){
 
         }
+        return redirect()->route('users.index');
     }
 
     /**
@@ -107,5 +110,6 @@ class UserController extends Controller
     {
        $user = $this->user->findByEncryptedId($id);
        $user->delete();
+       return back();
     }
 }
