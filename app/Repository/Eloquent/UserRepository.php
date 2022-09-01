@@ -4,6 +4,7 @@ namespace App\Repository\Eloquent;
 
 use App\Models\User;
 use App\Repository\UserRepositoryInterface;
+use Carbon\Carbon;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -14,7 +15,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getAllUsers()
     {
-       return  $this->model->paginate(10);
+        $month = \request()->month ?? Carbon::now()->format('m');
+       return  $this->model->withCount(['attendances'=>function($q) use ($month){
+           return $q->whereMonth('date', $month);
+       }])->paginate(10);
     }
 
     function storeUser($userData)

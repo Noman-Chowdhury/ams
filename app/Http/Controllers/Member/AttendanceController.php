@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
-use App\Repository\UserRepositoryInterface;
-use Carbon\Carbon;
+use App\Http\Requests\StoreAttendanceRequest;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
-/**
- * @property UserRepositoryInterface $user
- */
-class UserController extends Controller
+class AttendanceController extends Controller
 {
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->user = $userRepository;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->getAllUsers();
-        return view('admin.users.index', compact('users'));
+        return view('member.attendance.index');
     }
 
     /**
@@ -39,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('member.attendance.create');
     }
 
     /**
@@ -48,15 +35,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreAttendanceRequest $request)
     {
         $validated = $request->validated();
         try {
-            $this->user->storeUser($validated);
-        }catch(\Exception $exception){
+            Attendance::create($validated);
+        }catch (\Exception $exception){
             return back();
         }
-        return redirect()->route('users.index');
+        return back();
     }
 
     /**
@@ -67,8 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user =$this->user->findByEncryptedId($id);
-        return back();
+        //
     }
 
     /**
@@ -79,8 +65,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user =$this->user->findByEncryptedId($id);
-        return view('admin.users.edit', compact('user'));
+        //
     }
 
     /**
@@ -90,15 +75,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validated();
-        try{
-            $this->user->updateUser($id, $validated);
-        }catch (\Exception $exception){
-
-        }
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -109,8 +88,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       $user = $this->user->findByEncryptedId($id);
-       $user->delete();
-       return back();
+        //
     }
 }

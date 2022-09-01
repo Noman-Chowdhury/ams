@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class);
