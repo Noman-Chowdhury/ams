@@ -64,6 +64,8 @@
                                 @endif
                             </div>
                         </div>
+                        <p>admin@admin.com | 12345678</p>
+                        <p>member@member.com | 12345678</p>
                     </form>
                 </div>
             </div>

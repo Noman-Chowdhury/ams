@@ -10,22 +10,31 @@
                 <label>
                     Name
                 </label>
-                <input name="name" class="form-control" type="text" value="{{ old('name', $user->name) }}">
+                <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" value="{{ old('name', $user->name) }}">
+                @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-4">
                 <label>
                     Email
                 </label>
-                <input name="email" class="form-control" type="email" value="{{ old('email', $user->email) }}">
+                <input name="email" class="form-control @error('email') is-invalid @enderror" type="email" value="{{ old('email', $user->email) }}">
+                @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-4">
                 <label>
                     Role
                 </label>
-                <select name="role" id="" class="form-control">
+                <select name="role" id="" class="form-control @error('role') is-invalid @enderror">
                     <option value="admin" {{ $user->role === 'admin'? 'selected':'' }}>Admin</option>
                     <option value="member" {{ $user->role === 'member'? 'selected':'' }}>Member</option>
                 </select>
+                @error('role')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="row">
