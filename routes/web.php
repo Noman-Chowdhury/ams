@@ -15,17 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-//Route::get('login', )
+
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware('auth');
-Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class)->middleware('auth');
-
-
-//Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-//Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
-
+Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class)->only(['index', 'store'])->middleware('auth');
+Route::get('log',[\App\Http\Controllers\Member\AttendanceController::class, 'getLog'])->middleware('auth')->name('log');
 
 Route::get('/', function () {
-    $attn = \App\Models\Attendance::all();
-    return view('member.dashboard', compact('attn'));
-})->middleware('auth');
+    if (\auth()->user()->isAdmin()){
+        return view('admin.dashboard');
+    }
+    return view('member.dashboard');
+})->middleware('auth')->name('home');

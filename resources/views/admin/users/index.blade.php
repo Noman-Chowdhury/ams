@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <div class="row mt-2" >
+    <div class="row mt-2">
         <form action="{{ route('users.index') }}">
             <div class="row">
                 <div class="col-8">
@@ -85,7 +85,13 @@
                         alt="{{ $user->name }}" style="width: 50px; height: 50px; border-radius: 50%">
                 </td>
                 <td>{{ $user->name }}</td>
-                <td>{{ $user->attendances_count }}</td>
+                <td>
+                    @if($user->attendances_count < 1)
+                        <p class="text-danger">{{ $user->attendances_count }}</p>
+                    @else
+                        <p class="text-success">{{ $user->attendances_count }}</p>
+                    @endif
+                </td>
                 <td>
                     <div class="row">
                         <div class="col-6">
@@ -105,6 +111,6 @@
             </tr>
         @endforeach
         </tbody>
-        {{ $users->links() }}
     </table>
+    {{ $users->links() }}
 @endsection

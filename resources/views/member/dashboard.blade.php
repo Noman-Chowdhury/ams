@@ -45,12 +45,9 @@
                     },
                     @endforeach
                 ],
-                eventClick: function(calEvent, jsEvent, view) {
-                    alert('Event: ' + calEvent.title);
-                },
-                dateClick: function(info) {
-                    console.log(info)
-                    alert('selected ' + info.startStr + ' to ' + info.endStr);
+                select: function(info) {
+                    const date = info._d.toLocaleString()
+                    window.location.href='/log?date='+date
                 }
             });
         });

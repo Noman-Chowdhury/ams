@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    @if(!auth()->user())
+    @if(auth()->user()->attendances()->whereDate('date',\Carbon\Carbon::now())->first())
         You have given your attendance today!
     @else
     <form action="{{route('attendances.store')}}" method="POST">
@@ -12,5 +12,6 @@
         </div>
     </form>
     @endif
-    Attendance Index From Member
+    {{ auth()->user()->presentToday}}
+        <h3>Memo</h3>
 @endsection

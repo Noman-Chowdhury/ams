@@ -58,9 +58,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class, 'user_id');
     }
-
-    public function presentToday()
-    {
-        return $this->attendances()->whereDate('date', Carbon::now());
-    }
 }

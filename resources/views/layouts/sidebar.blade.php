@@ -2,21 +2,21 @@
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a class="nav-link {{ Route::currentRouteName()==='home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">
                     <span data-feather="home" class="align-text-bottom"></span>
                     Dashboard
                 </a>
             </li>
             @if(auth()->user()->isAdmin())
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('users.index') }}">
+                <a class="nav-link  {{ Route::currentRouteName()==='users.index' ? 'active' : '' }}" href="{{ route('users.index') }}">
                     <span data-feather="file" class="align-text-bottom"></span>
                     Users
                 </a>
             </li>
             @endif
             @if(auth()->user()->isMember())
-            <li class="nav-item">
+            <li class="nav-item {{ Route::currentRouteName()==='attendances.index' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('attendances.index') }}">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Attendance

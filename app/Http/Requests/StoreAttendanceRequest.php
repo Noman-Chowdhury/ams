@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAttendanceRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class StoreAttendanceRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -34,7 +35,7 @@ class StoreAttendanceRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-            'user_id'=>2,
+            'user_id'=>auth()->user()->id,
             'date'=>Carbon::now()
         ]);
     }
