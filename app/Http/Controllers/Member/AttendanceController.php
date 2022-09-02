@@ -61,6 +61,5 @@ class AttendanceController extends Controller
     public function getLog()
     {
         return view('member.attendance.log');
-        $status = auth()->user()->attendances()->whereDate('date', Carbon::parse(\request()->date)->format('Y-m-d'))->first();
    }
 }

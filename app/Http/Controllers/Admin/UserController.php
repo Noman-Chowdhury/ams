@@ -54,9 +54,9 @@ class UserController extends Controller
         try {
             $this->user->storeUser($validated);
         } catch (\Exception $exception) {
-            return $exception;
+            return back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User added successfully');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
         try {
             $this->user->updateUser($id, $validated);
         } catch (\Exception $exception) {
-            return $exception;
+            return back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('users.index');
     }
@@ -111,6 +111,6 @@ class UserController extends Controller
     {
         $user = $this->user->findByEncryptedId($id);
         $user->delete();
-        return back();
+        return back()->with('success', 'Deleted!');
     }
 }
