@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Auth::routes();
 //Route::get('login', )
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware('auth');
 Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController::class)->middleware('auth');
@@ -24,9 +26,6 @@ Route::resource('attendances', \App\Http\Controllers\Member\AttendanceController
 
 
 Route::get('/', function () {
-    return view('home');
+    $attn = \App\Models\Attendance::all();
+    return view('member.dashboard', compact('attn'));
 })->middleware('auth');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

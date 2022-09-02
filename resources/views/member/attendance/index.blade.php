@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    @if(auth()->user()->presentToday)
+    @if(!auth()->user())
         You have given your attendance today!
     @else
-
     <form action="{{route('attendances.store')}}" method="POST">
         @csrf
         <input type="hidden" value="present" name="status">

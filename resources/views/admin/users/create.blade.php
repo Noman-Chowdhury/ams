@@ -6,13 +6,13 @@
         @csrf
         <div class="row">
             <div class="col-4">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                <label>
                    Name
                 </label>
                 <input name="name" class="form-control" type="text" value="{{ old('name') }}">
             </div>
             <div class="col-4">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                <label>
                    Email
                 </label>
                 <input name="email" class="form-control" type="email" value="{{ old('email') }}">

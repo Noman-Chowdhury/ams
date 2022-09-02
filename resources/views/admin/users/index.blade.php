@@ -87,15 +87,15 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->attendances_count }}</td>
                 <td>
-                    <div>
-                        <div>
-                            <a href="{{ route('users.edit',encrypt($user->id)) }}">Edit</a>
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="{{ route('users.edit',encrypt($user->id)) }}" class="btn btn-warning">Edit</a>
                         </div>
-                        <div>
+                        <div class="col-6">
                             <form action="{{ route('users.destroy', encrypt($user->id)) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit">
+                                <button type="submit" class="btn btn-danger">
                                     Delete
                                 </button>
                             </form>
